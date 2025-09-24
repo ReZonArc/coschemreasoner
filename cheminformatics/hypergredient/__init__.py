@@ -30,7 +30,9 @@ try:
     from .optimization import (
         HypergredientFormulator,
         FormulationOptimizer,
-        OptimizationObjective
+        OptimizationObjective,
+        FormulationRequest,
+        FormulationSolution
     )
 
     from .interaction import (
@@ -43,6 +45,14 @@ try:
         PerformanceMetrics
     )
 
+    from .meta_optimization import (
+        MetaOptimizationStrategy,
+        OptimizationStrategy,
+        ConditionTreatmentPair,
+        OptimizationResult,
+        MetaOptimizationCache
+    )
+
     __all__ = [
         'Hypergredient',
         'HypergredientDatabase', 
@@ -53,10 +63,17 @@ try:
         'HypergredientFormulator',
         'FormulationOptimizer',
         'OptimizationObjective',
+        'FormulationRequest',
+        'FormulationSolution',
         'InteractionMatrix',
         'calculate_synergy_score',
         'DynamicScoringSystem',
-        'PerformanceMetrics'
+        'PerformanceMetrics',
+        'MetaOptimizationStrategy',
+        'OptimizationStrategy',
+        'ConditionTreatmentPair',
+        'OptimizationResult',
+        'MetaOptimizationCache'
     ]
 
 except ImportError as e:
