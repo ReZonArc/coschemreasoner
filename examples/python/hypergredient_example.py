@@ -272,5 +272,57 @@ def main():
         traceback.print_exc()
 
 
+def demonstrate_meta_optimization():
+    """Demonstrate meta-optimization capabilities"""
+    print("🚀 META-OPTIMIZATION STRATEGY")
+    print("=" * 40)
+    
+    try:
+        from cheminformatics.hypergredient import MetaOptimizationStrategy
+        
+        db = create_hypergredient_database()
+        meta_optimizer = MetaOptimizationStrategy(db, cache_size=20)
+        
+        print(f"✓ Meta-optimizer initialized")
+        print(f"✓ Condition categories: {len(meta_optimizer.condition_treatment_mapping)}")
+        print(f"✓ Total combinations: {sum(len(pairs) for pairs in meta_optimizer.condition_treatment_mapping.values())}")
+        print()
+        
+        # Quick demonstration
+        print("🎯 QUICK META-OPTIMIZATION DEMO:")
+        print("-" * 35)
+        
+        # Run small optimization
+        original_mapping = meta_optimizer.condition_treatment_mapping
+        demo_mapping = {'acne': original_mapping['acne'][:1]}  # Just one pair
+        meta_optimizer.condition_treatment_mapping = demo_mapping
+        
+        results = meta_optimizer.optimize_all_conditions(max_solutions_per_condition=1)
+        
+        if results and 'acne' in results:
+            result = results['acne'][0]
+            print(f"✓ Generated formulation for {result.condition_treatment_pair.condition}")
+            print(f"✓ Strategy used: {result.optimization_strategy.value}")
+            print(f"✓ Quality score: {result.quality_score:.1f}/10")
+            if result.formulation_solutions:
+                best = result.formulation_solutions[0]
+                print(f"✓ Best solution score: {best.total_score:.1f}/10")
+                print(f"✓ Cost: R{best.cost:.2f}")
+        
+        # Restore mapping
+        meta_optimizer.condition_treatment_mapping = original_mapping
+        
+        print()
+        print("💡 For full meta-optimization demo, run: python examples/python/meta_optimization_example.py")
+        print()
+        
+    except ImportError:
+        print("❌ Meta-optimization not available - check installation")
+
+
 if __name__ == "__main__":
+    # Run main demonstrations
     main()
+    
+    # Run meta-optimization demo
+    demonstrate_meta_optimization()
